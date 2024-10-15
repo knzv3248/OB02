@@ -12,13 +12,16 @@
 # снаружи. Предоставь доступ к необходимым атрибутам через методы (например, get и set методы).
 
 class User:
+    # Общий список пользователей для всех экземпляров класса User
+    users = []
+
     def __init__(self, id, name, permission):
         self.id = id
         self.name = name
         self.permission = permission
 
 class Admin(User):
-    users = []  # Общий список пользователей для всех экземпляров класса Admin
+    # users = []  # Общий  пользователей для всех экземпляров класса Admin
 
     def __init__(self, id, name, permission):
         super().__init__(id, name, permission)
@@ -49,8 +52,8 @@ class Admin(User):
 admin = Admin(0, 'superadmin', 'admin')
 # admin.__add_user(1, 'vasya', 'user') # Приводит к ошибке, т.к. нет доступа к функции __add_user
 admin.set_user(1, 'vasya', 'user')
-admin.set_user(5, 'serg', 'Админ')
+admin.set_user(5, 'serg', 'Админ')  # Приводит к ошибке, т.к. не правильно указано право доступа
 admin.set_user(2, 'masha', 'User')
-admin.set_user(2, 'sega', 'user')
+admin.set_user(2, 'sega', 'user')   # Специально добавлен пользователь с уже существующим ID=2, т.к. проверка на уникальность ID не производится
 admin.set_user(3, 'vera', 'admin')
-admin.get_remove(2)  # Удалит пользователей с ID 2
+admin.get_remove(2)  # Удалит обоих пользователей с ID=2
